@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Acquisition</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            width: 80%;
+            max-width: 600px;
+            text-align: center;
+        }
+
+        .add-btn {
+            display: inline-block;
+            padding: 10px 15px;
+            margin-bottom: 15px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        .add-btn:hover {
+            background-color: #0056b3;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        th, td {
+            padding: 10px;
+            border: 1px solid #ddd;
+            text-align: center;
+        }
+
+        th {
+            background-color: #007bff;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        tr:hover {
+            background-color: #ddd;
+        }
+
+        .delete-btn {
+            color: white;
+            background-color: #dc3545;
+            padding: 5px 10px;
+            text-decoration: none;
+            border-radius: 3px;
+            font-weight: bold;
+            display: inline-block;
+        }
+
+        .delete-btn:hover {
+            background-color: #b52a37;
+        }
+    </style>
+</head>
+<body>
+    <h1>Data Acquisition</h1>
+    
+    <div class="container">
+        <a href="{{ url_for('add') }}" class="add-btn">+ Add New Data</a>
+        
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nama</th>
+                    <th>Umur</th>
+                    <th>Status</th>
+                    <th>Sosmed</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in data %}
+                <tr>
+                    <td>{{ row['id'] }}</td>
+                    <td>{{ row['Nama'] }}</td>
+                    <td>{{ row['Umur'] }}</td>
+                    <td>{{ row['Status'] }}</td>
+                    <td>{{ row['Sosmed'] }}</td>
+                    <td>
+                        <a href="{{ url_for('delete', id=row['id']) }}" class="delete-btn">Delete</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
